@@ -17,6 +17,19 @@ MongoClient.connect(connectionString, {useUnifiedTopology: true})
     const db = client.db('message-board-communications')
     const messageCollection = db.collection('message')
 
+    app.put('/put',(request,response)=>{
+        db.collection('message').updateOne({_id: ObjectId(request.body.apple)},{
+            $set: {likes: request.body.variableForLike + 1}
+        })
+        .then(result =>{
+            response.json('update successful')
+        })
+        .catch(err=>{
+            console.log(`could not update ${err}`)
+        })
+    })
+
+
     app.get('/',(request, response)=>{
         db.collection('message').find().toArray()
         .then(result=>{
@@ -35,7 +48,7 @@ MongoClient.connect(connectionString, {useUnifiedTopology: true})
     })
 
     app.post('/messages',(request, response)=>{
-        db.collection('message').insertOne(request.body)
+        db.collection('message').insertOne({title: request.body.title, message: request.body.message, userName: request.body.userName, likes: 0})
         .then(result => {
             console.log(result)
             response.redirect('/')

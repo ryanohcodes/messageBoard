@@ -3,6 +3,32 @@ Array.from(deleteButtons).forEach(x => {
     x.addEventListener('click', deleteThis)
 })
 
+const likeButtons = document.querySelectorAll('.likes')
+Array.from(likeButtons).forEach( likeButton =>{
+    likeButton.addEventListener('click', likeMe)
+})
+
+async function likeMe(){
+    const idValue = this.parentNode.childNodes[1].textContent
+    const likeValue = Number(this.parentNode.childNodes[11].textContent)
+    try{
+        const promise = await fetch('/put', {
+            method: 'put',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                apple: idValue,
+                variableForLike : likeValue
+            })
+        })
+        let ressy = await promise.json()
+        console.log(ressy)
+        location.reload()
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 async function deleteThis(){
     const id = this.parentNode.childNodes[1].textContent
     try{

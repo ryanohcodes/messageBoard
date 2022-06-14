@@ -8,6 +8,19 @@ Array.from(likeButtons).forEach( likeButton =>{
     likeButton.addEventListener('click', likeMe)
 })
 
+const reveal = document.querySelector('.reveal')
+reveal.addEventListener('click', newPage)
+
+
+async function newPage(){
+    const promise = await fetch('/new',{
+        method: 'get',
+        redirect: 'follow'
+        //headers: {'Content-type': 'text/html'},
+    })
+    //document.querySelector('form').classList.toggle('hidden')
+}
+
 async function likeMe(){
     const idValue = this.parentNode.childNodes[1].textContent
     const likeValue = Number(this.parentNode.childNodes[11].textContent)

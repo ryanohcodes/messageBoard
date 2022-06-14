@@ -29,9 +29,12 @@ MongoClient.connect(connectionString, {useUnifiedTopology: true})
         })
     })
 
+    app.get('/new',(request,response)=>{
+        response.render('new.ejs')
+    })
 
     app.get('/',(request, response)=>{
-        db.collection('message').find().toArray()
+        db.collection('message').find().sort({likes: -1}).toArray()
         .then(result=>{
             response.render('index.ejs',{data: result})
         })

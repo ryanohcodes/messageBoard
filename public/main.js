@@ -11,7 +11,7 @@ Array.from(likeButtons).forEach( likeButton =>{
 const reveal = document.querySelector('.reveal')
 reveal.addEventListener('click', newPage)
 
-
+// async functions for get and delete
 async function newPage(){
     const promise = await fetch('/new',{
         method: 'get',

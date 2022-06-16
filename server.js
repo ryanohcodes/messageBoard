@@ -6,6 +6,7 @@ app.set('view engine','ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(express.static('public'))
+//remember to add object to grab by unique object
 const MongoClient = require('mongodb').MongoClient
 const ObjectId = require('mongodb').ObjectId
 

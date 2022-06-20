@@ -29,11 +29,11 @@ MongoClient.connect(connectionString, {useUnifiedTopology: true})
             console.log(`could not update ${err}`)
         })
     })
-
+    //renders the new.ejs page
     app.get('/new',(request,response)=>{
         response.render('new.ejs')
     })
-
+    //initial request to grab the likes and then loads tha data to the index.ejs
     app.get('/',(request, response)=>{
         db.collection('message').find().sort({likes: -1}).toArray()
         .then(result=>{
